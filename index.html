@@ -194,92 +194,25 @@
           <p class="eyebrow">Submit a request</p>
           <h2>Send your items through for review.</h2>
           <p>
-            Add your contact details and upload photos for each item. We will reply
-            with whether we can take it on, the likely price range, and the proposed fee.
+            Add your contact details and upload photos through the form. We will reply
+            with whether we can take the item on, the likely price range, and the proposed fee.
             Items should usually be worth at least $100, unless they are part of a bundle.
           </p>
+          <a class="button secondary request-link" href="https://tally.so/r/rjWVKL" target="_blank" rel="noreferrer">Open form in new tab</a>
         </div>
 
-        <form id="request-form" class="request-form" novalidate>
-          <fieldset>
-            <legend>Your details</legend>
-            <div class="form-grid">
-              <label>
-                Full name
-                <input name="fullName" type="text" autocomplete="name" required placeholder="Jane Smith">
-              </label>
-              <label>
-                Email
-                <input name="email" type="email" autocomplete="email" required placeholder="you@example.com">
-              </label>
-              <label>
-                Phone
-                <input name="phone" type="tel" autocomplete="tel" required placeholder="0499 350 950">
-              </label>
-              <label>
-                Suburb
-                <input name="suburb" type="text" autocomplete="address-level2" required placeholder="Spring Hill">
-              </label>
-            </div>
-          </fieldset>
-
-          <fieldset>
-            <legend>Sale preferences</legend>
-            <div class="form-grid">
-              <label>
-                How soon do you want it sold?
-                <select name="urgency" required>
-                  <option value="">Choose one</option>
-                  <option>ASAP</option>
-                  <option>Within 2 weeks</option>
-                  <option>Within 1 month</option>
-                  <option>No rush</option>
-                </select>
-              </label>
-              <label>
-                Preferred contact method
-                <select name="contactMethod" required>
-                  <option value="">Choose one</option>
-                  <option>Text message</option>
-                  <option>Email</option>
-                  <option>Phone call</option>
-                </select>
-              </label>
-            </div>
-            <label>
-              Anything we should know?
-              <textarea name="notes" rows="4" placeholder="Access details, stairs, parking, preferred pickup times, or anything else that helps."></textarea>
-            </label>
-          </fieldset>
-
-          <fieldset>
-            <div class="items-header">
-              <legend>Items to sell</legend>
-              <button class="button small secondary" type="button" id="add-item">Add another item</button>
-            </div>
-
-            <div id="items-list" class="items-list"></div>
-          </fieldset>
-
-          <label class="consent">
-            <input name="consent" type="checkbox" required>
-            <span>
-              I confirm I own these items or have permission to sell them, and I understand
-              Listed For You will confirm terms before listing anything.
-            </span>
-          </label>
-
-          <div class="form-actions">
-            <button class="button primary" type="submit">Submit request</button>
-            <button class="button secondary" type="button" id="download-summary">Download summary</button>
-          </div>
-
-          <p class="form-note">
-            We will review your request and confirm the sale range, commission and next steps before listing anything.
-          </p>
-
-          <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
-        </form>
+        <div class="tally-card">
+          <iframe
+            data-tally-src="https://tally.so/embed/rjWVKL?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
+            loading="lazy"
+            width="100%"
+            height="760"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Listed For You item submission form"
+          ></iframe>
+        </div>
       </section>
 
       <section id="faq" class="section faq-section">
@@ -336,45 +269,7 @@
       <a href="#top">Back to top</a>
     </footer>
 
-    <template id="item-template">
-      <article class="item-card" data-item-card>
-        <div class="item-card-header">
-          <h3>Item <span data-item-number></span></h3>
-          <button class="remove-item" type="button" data-remove-item>Remove</button>
-        </div>
-        <div class="form-grid">
-          <label>
-            What is it?
-            <input name="itemTitle" type="text" required placeholder="Sofa, bike, mirror, tools">
-          </label>
-          <label>
-            Minimum price you would accept
-            <input name="minimumPrice" type="number" min="0" step="1" placeholder="250">
-          </label>
-          <label>
-            Condition
-            <select name="condition" required>
-              <option value="">Choose one</option>
-              <option>Excellent</option>
-              <option>Very good</option>
-              <option>Good</option>
-              <option>Fair</option>
-              <option>Needs repair</option>
-            </select>
-          </label>
-          <label>
-            Dimensions, brand or extra details
-            <input name="details" type="text" placeholder="Approx. 180cm wide, Freedom brand">
-          </label>
-        </div>
-        <label>
-          Photos
-          <input name="photos" type="file" accept="image/*" multiple>
-        </label>
-        <div class="photo-preview" data-photo-preview></div>
-      </article>
-    </template>
-
     <script src="script.js"></script>
+    <script async src="https://tally.so/widgets/embed.js"></script>
   </body>
 </html>
