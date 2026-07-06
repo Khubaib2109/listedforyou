@@ -1,5 +1,5 @@
 :root {
-  --navy: #09213f; 
+  --navy: #09213f;
   --blue: #0f5fb8;
   --blue-2: #1f7ae0;
   --sky: #eaf4ff;
@@ -8,8 +8,10 @@
   --line: #d8e2ef;
   --surface: #ffffff;
   --soft: #f5f8fc;
+  --mist: #f8fbff;
   --green: #1f8a70;
   --shadow: 0 22px 60px rgba(9, 33, 63, 0.14);
+  --soft-shadow: 0 12px 34px rgba(9, 33, 63, 0.09);
   --radius: 8px;
   --max: 1160px;
 }
@@ -27,7 +29,9 @@ body {
   color: var(--ink);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   line-height: 1.5;
-  background: var(--surface);
+  background:
+    radial-gradient(circle at 8% 0%, rgba(31, 122, 224, 0.12), transparent 30rem),
+    linear-gradient(180deg, #ffffff 0%, #f8fbff 46rem, #ffffff 100%);
 }
 
 body.nav-open {
@@ -71,7 +75,7 @@ textarea {
   justify-content: space-between;
   gap: 24px;
   padding: 16px clamp(18px, 4vw, 44px);
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.9);
   border-bottom: 1px solid rgba(216, 226, 239, 0.85);
   backdrop-filter: blur(18px);
 }
@@ -92,7 +96,9 @@ textarea {
   font-size: 0.82rem;
   font-weight: 800;
   letter-spacing: 0.03em;
-  background: linear-gradient(135deg, var(--navy), var(--blue-2));
+  background:
+    radial-gradient(circle at 30% 20%, rgba(255, 255, 255, 0.32), transparent 1.6rem),
+    linear-gradient(135deg, var(--navy), var(--blue-2));
   border-radius: var(--radius);
 }
 
@@ -164,7 +170,7 @@ textarea {
   align-items: center;
   max-width: var(--max);
   margin: 0 auto;
-  padding: clamp(44px, 8vw, 92px) clamp(18px, 4vw, 32px) 44px;
+  padding: clamp(44px, 8vw, 86px) clamp(18px, 4vw, 32px) 44px;
 }
 
 .eyebrow {
@@ -298,6 +304,15 @@ h3 {
   box-shadow: var(--shadow);
 }
 
+.hero-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(9, 33, 63, 0) 52%, rgba(9, 33, 63, 0.28) 100%);
+  pointer-events: none;
+}
+
 .hero-media img {
   width: 100%;
   height: 100%;
@@ -307,6 +322,7 @@ h3 {
 
 .floating-card {
   position: absolute;
+  z-index: 2;
   right: 18px;
   bottom: 18px;
   max-width: 270px;
@@ -332,11 +348,12 @@ h3 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 clamp(18px, 4vw, 32px) 36px;
+  padding: 0 clamp(18px, 4vw, 32px) 46px;
 }
 
 .trust-strip span {
   padding: 16px;
+  background: rgba(255, 255, 255, 0.76);
   color: var(--navy);
   font-weight: 800;
   text-align: center;
@@ -369,13 +386,14 @@ h3 {
   font-size: 1.05rem;
 }
 
-.steps {
+.process-flow {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 16px;
+  gap: 18px;
 }
 
-.steps article,
+.process-step,
 .price-card,
 .item-card,
 .faq-list details {
@@ -384,18 +402,39 @@ h3 {
   border-radius: var(--radius);
 }
 
-.steps article {
-  padding: 22px;
+.process-step {
+  position: relative;
+  padding: 24px;
+  box-shadow: var(--soft-shadow);
 }
 
-.steps span {
-  display: inline-flex;
+.process-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 42px;
+  right: -23px;
+  z-index: 1;
+  width: 28px;
+  height: 28px;
+  background: var(--surface);
+  border-top: 2px solid var(--blue-2);
+  border-right: 2px solid var(--blue-2);
+  transform: rotate(45deg);
+}
+
+.step-number {
+  display: inline-grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
   margin-bottom: 18px;
-  color: var(--blue);
+  color: #fff;
   font-weight: 900;
+  background: linear-gradient(135deg, var(--blue), var(--navy));
+  border-radius: 999px;
 }
 
-.steps p,
+.process-step p,
 .price-card p,
 .faq-list p {
   color: var(--muted);
@@ -460,17 +499,19 @@ h3 {
 
 .pricing-grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
+  grid-template-columns: 1fr 1.08fr 1fr;
   gap: 18px;
 }
 
 .price-card {
+  position: relative;
   padding: 24px;
 }
 
 .price-card.featured {
   border-color: rgba(15, 95, 184, 0.4);
-  box-shadow: var(--shadow);
+  background: linear-gradient(180deg, #ffffff 0%, #f2f8ff 100%);
+  box-shadow: var(--soft-shadow);
 }
 
 .badge {
@@ -490,6 +531,10 @@ h3 {
   font-size: 4rem;
   font-weight: 950;
   line-height: 1;
+}
+
+.small-price {
+  font-size: 3rem;
 }
 
 .fee-list {
@@ -533,9 +578,10 @@ h3 {
 
 .request-form {
   padding: clamp(18px, 4vw, 28px);
-  background: var(--soft);
+  background: linear-gradient(180deg, #ffffff 0%, var(--soft) 100%);
   border: 1px solid var(--line);
   border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
 }
 
 fieldset {
@@ -614,6 +660,7 @@ textarea.invalid {
 
 .item-card {
   padding: 18px;
+  box-shadow: 0 8px 20px rgba(9, 33, 63, 0.05);
 }
 
 .item-card-header {
@@ -715,8 +762,11 @@ textarea.invalid {
   gap: 24px;
   align-items: center;
   margin-bottom: 28px;
-  background: var(--sky);
+  background:
+    linear-gradient(135deg, rgba(234, 244, 255, 0.96), rgba(255, 255, 255, 0.86)),
+    radial-gradient(circle at 86% 24%, rgba(31, 122, 224, 0.18), transparent 18rem);
   border-radius: var(--radius);
+  border: 1px solid var(--line);
 }
 
 .contact-card {
@@ -774,8 +824,12 @@ textarea.invalid {
     padding-inline: clamp(18px, 4vw, 32px);
   }
 
-  .steps {
+  .process-flow {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .process-step:not(:last-child)::after {
+    display: none;
   }
 
   .request-intro {
@@ -813,6 +867,10 @@ textarea.invalid {
     padding-top: 34px;
   }
 
+  .hero-copy {
+    text-align: left;
+  }
+
   .hero-media,
   .hero-media img {
     min-height: 360px;
@@ -836,8 +894,22 @@ textarea.invalid {
     border-bottom: 1px solid var(--line);
   }
 
-  .steps {
+  .process-flow {
     grid-template-columns: 1fr;
+  }
+
+  .process-step {
+    padding-left: 70px;
+  }
+
+  .step-number {
+    position: absolute;
+    top: 22px;
+    left: 18px;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    font-size: 0.9rem;
   }
 
   .items-header,
@@ -850,7 +922,29 @@ textarea.invalid {
 
 @media (max-width: 480px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.38rem;
+    line-height: 1;
+  }
+
+  h2 {
+    font-size: 1.85rem;
+  }
+
+  .site-header {
+    padding-inline: 14px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-mark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand small {
+    display: none;
   }
 
   .floating-card {
@@ -867,5 +961,11 @@ textarea.invalid {
 
   .button {
     width: 100%;
+  }
+
+  .section,
+  .feature-band,
+  .contact-band {
+    padding-block: 46px;
   }
 }
